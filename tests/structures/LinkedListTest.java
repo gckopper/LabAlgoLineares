@@ -66,4 +66,24 @@ public class LinkedListTest {
         assertEquals(paciente2, list.remove());
         assertEquals(paciente3, list.remove());
     }
+
+    @Test
+    public void testQueueMultiColisionUnordered() {
+        LinkedList<Paciente> list = new LinkedList<Paciente>();
+        Paciente paciente1 = new Paciente("nome1", 1);
+        Paciente paciente2 = new Paciente("nome2", 1);
+        Paciente paciente3 = new Paciente("nome3", 5);
+        Paciente paciente4 = new Paciente("nome4", 2);
+        Paciente paciente5 = new Paciente("nome5", 1);
+        list.add(paciente1);
+        list.add(paciente2);
+        list.add(paciente3);
+        list.add(paciente4);
+        list.add(paciente5);
+        assertEquals(paciente1, list.remove());
+        assertEquals(paciente2, list.remove());
+        assertEquals(paciente5, list.remove());
+        assertEquals(paciente4, list.remove());
+        assertEquals(paciente3, list.remove());
+    }
 }
