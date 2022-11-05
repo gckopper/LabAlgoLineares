@@ -62,22 +62,24 @@ public final class LinkedList<T extends Orderable<T>> implements PriorityQueue<T
             return;
         }
         Node<T> node;
-        for (node = this.first; isRightPlace(node, element); node = node.next);
-        Node<T> newNode = new Node<T>(node, node.previous, element);
-        node.previous.next = newNode;
-        node.previous = newNode;
+        for (node = this.first; keepGoing(node, element); node = node.next);
+        insertAfter(node, element);
     }
 
-    private void insertBefore(Node<T> node) {
-        // TODO
+    private void insertAfter(Node<T> node, T element) {
+        Node<T> newNode = new Node<T>(node.next, node, element);
+        if (node.next != null) {
+            node.next.previous = newNode;
+        }
+        node.next = newNode;
     }
 
-    private boolean isRightPlace(Node<T> node, T element) {
-        return nullCheck(node) && node.value.isSmaller(element);
+    private boolean keepGoing(Node<T> node, T element) {
+        return nullCheck(node.next) && node.next.value.isSmallerOrEqual(element);
     }
 
     private boolean nullCheck(Node<T> node) {
-        return node != null && node.value != null;
+        return node != null;
     }
 
     @Override
