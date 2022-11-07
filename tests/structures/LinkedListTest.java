@@ -18,6 +18,20 @@ public class LinkedListTest {
     }
 
     @Test
+    public void testAddToEndMulti() {
+        LinkedList<Paciente> list = new LinkedList<Paciente>();
+        Paciente paciente1 = new Paciente("nome1", 1);
+        Paciente paciente2 = new Paciente("nome2", 2);
+        Paciente paciente3 = new Paciente("nome3", 3);
+        list.addToEnd(paciente1);
+        list.addToEnd(paciente2);
+        list.addToEnd(paciente3);
+        assertEquals(list.remove(), paciente1);
+        assertEquals(list.remove(), paciente2);
+        assertEquals(list.remove(), paciente3);
+    }
+
+    @Test
     public void testQueueSingle() {
         LinkedList<Paciente> list = new LinkedList<Paciente>();
         Paciente paciente = new Paciente("nome", 69);
@@ -34,9 +48,9 @@ public class LinkedListTest {
         list.add(paciente1);
         list.add(paciente2);
         list.add(paciente3);
-        assertEquals(list.remove(), paciente1);
-        assertEquals(list.remove(), paciente2);
         assertEquals(list.remove(), paciente3);
+        assertEquals(list.remove(), paciente2);
+        assertEquals(list.remove(), paciente1);
     }
 
     @Test
@@ -48,9 +62,9 @@ public class LinkedListTest {
         list.add(paciente1);
         list.add(paciente3);
         list.add(paciente2);
-        assertEquals(paciente1, list.remove());
-        assertEquals(paciente2, list.remove());
         assertEquals(paciente3, list.remove());
+        assertEquals(paciente2, list.remove());
+        assertEquals(paciente1, list.remove());
     }
 
     @Test
@@ -80,10 +94,10 @@ public class LinkedListTest {
         list.add(paciente3);
         list.add(paciente4);
         list.add(paciente5);
+        assertEquals(paciente3, list.remove());
+        assertEquals(paciente4, list.remove());
         assertEquals(paciente1, list.remove());
         assertEquals(paciente2, list.remove());
         assertEquals(paciente5, list.remove());
-        assertEquals(paciente4, list.remove());
-        assertEquals(paciente3, list.remove());
     }
 }

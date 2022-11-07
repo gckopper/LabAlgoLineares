@@ -29,7 +29,7 @@ public final class LinkedList<T extends Orderable<T>> implements PriorityQueue<T
     private void init(Node<T> node) {
         this.first = node;
         this.last = node;
-        this.length += 1;
+        this.length++;
     }
 
     public T getFirst() {
@@ -52,7 +52,28 @@ public final class LinkedList<T extends Orderable<T>> implements PriorityQueue<T
             return;
         }
         this.last.next = new Node<T>(null, this.last, value);
+        this.last = this.last.next;
         this.length++;
+    }
+
+    public void addToBeginning(T value) {
+        if (this.last == null || this.first == null) {
+            init(value);
+            return;
+        }
+        this.first.previous = new Node<T>(null, this.last, value);
+        this.first = this.first.previous;
+        this.length++;
+    }
+
+    public boolean isEmpty() {
+        return this.last == null || this.first == null;
+    }
+
+    public void reset() {
+        this.first = null;
+        this.last = null;
+        this.length = 0;
     }
 
     @Override
@@ -61,33 +82,46 @@ public final class LinkedList<T extends Orderable<T>> implements PriorityQueue<T
             init(element);
             return;
         }
+        if (last.value.isBigger(element) || last.value.isEqual(element)) {
+            addToEnd(element);
+            return;
+        }
         Node<T> node;
         for (node = this.first; keepGoing(node, element); node = node.next);
-        insertAfter(node, element);
+        insertBefore(node, element);
     }
 
-    private void insertAfter(Node<T> node, T element) {
-        Node<T> newNode = new Node<T>(node.next, node, element);
-        if (node.next != null) {
-            node.next.previous = newNode;
+    private void insertBefore(Node<T> node, T element) {
+        Node<T> newNode = new Node<T>(node, node.previous, element);
+        if (node.previous == null) {
+            this.first = newNode;
+        } else {
+            node.previous.next = newNode;
         }
-        node.next = newNode;
+        node.previous = newNode;
+        this.length++;
     }
 
     private boolean keepGoing(Node<T> node, T element) {
-        return nullCheck(node.next) && node.next.value.isSmallerOrEqual(element);
+        return nullCheck(node) && node.value.isBigger(element);
     }
 
     private boolean nullCheck(Node<T> node) {
-        return node != null;
+        return node.next != null;
     }
 
     @Override
     public T remove() {
+        if (first == null || last == null) {
+            return null;
+        }
         T result = this.first.value;
         if (this.first.next != null) {
             this.first = this.first.next;
             this.first.previous = null;
+        } else {
+            this.first = null;
+            this.last = null;
         }
         return result;
     }

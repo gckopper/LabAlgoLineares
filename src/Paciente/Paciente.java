@@ -25,8 +25,13 @@ public class Paciente implements Orderable<Paciente>{
     }
 
     @Override
-    public boolean isSmallerOrEqual(Paciente toCompare) {
-        return this.idade <= toCompare.idade;
+    public boolean isBigger(Paciente toCompare) {
+        return this.idade > toCompare.idade;
+    }
+
+    @Override
+    public boolean isSmaller(Paciente toCompare) {
+        return this.idade < toCompare.idade;
     }
 
     @Override
