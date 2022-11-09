@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class TUI extends Interface{
+public class TUI extends UserInterface{
 
     @Override
     public String inputLine() {
@@ -13,8 +13,8 @@ public class TUI extends Interface{
             return obj.readLine();
         } catch (IOException e) {
             System.err.println(e);
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -24,14 +24,17 @@ public class TUI extends Interface{
 
     @Override
     public int inputInt() {
-        // TODO Auto-generated method stub
-        return 0;
+        try {
+            return Integer.parseInt(inputLine());
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return Integer.MIN_VALUE;
     }
 
     @Override
     public void output(String text) {
-        // TODO Auto-generated method stub
-        
+        System.out.println(text);
     }
     
 }
