@@ -75,8 +75,16 @@ public abstract class UserInterface {
             if (input == opcoes.length - 1) {
                 break;
             }
+            Method method = methods[input];
             try {
-                methods[input].invoke(null);
+                if (method.getParameterCount() == 0) {
+                    method.invoke(null);
+                    continue;
+                }
+                if (method.getParameterCount() == 1 && UserInterface.class.isAssignableFrom(method.getParameterTypes()[0])) {
+                    method.invoke(null, this);
+                    continue;
+                }
             } catch (IllegalAccessException e) {
                 output(String.format("%s%s%s", configBundle.getString("ErrorPermisionKey"), e, configBundle.getString("ErrorMsgEnd")));
             } catch (IllegalArgumentException e) {
