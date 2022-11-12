@@ -28,7 +28,7 @@ public abstract class UserInterface {
                     break;
                 }
             }
-        } while (lock);
+        } while (lock && acceptable.length != 0);
         return answer;
     }
     public int question(boolean lock, String prompt, int ceiling, int floor) {
