@@ -6,6 +6,6 @@ import ui.UserInterface;
 public class Main {
     public static void main(String []args) {
         UserInterface userInterface = new TUI();
-        userInterface.autoMenu(Logic.class);
+        userInterface.autoMenu(Menu.class);
     }
 }

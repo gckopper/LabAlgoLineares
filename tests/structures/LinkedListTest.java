@@ -1,6 +1,7 @@
 package structures;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.Test;
 
@@ -98,4 +99,12 @@ public class LinkedListTest {
         assertEquals(paciente2, list.remove());
         assertEquals(paciente5, list.remove());
     }
+
+    @Test
+    public void testRemoveOnEmpty() {
+        LinkedList<Paciente> list = new LinkedList<Paciente>();
+        Paciente paciente = list.remove();
+        assertNull(paciente);
+    }
+
 }
