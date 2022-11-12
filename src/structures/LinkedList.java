@@ -125,5 +125,18 @@ public final class LinkedList<T extends Orderable<T>> implements PriorityQueue<T
         }
         return result;
     }
-    
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("Começo: ");
+        for (Node<T> node = this.first; node != null; node = node.next)    {
+            if (node.value != null) {
+                result.append(node.value.toString());
+                result.append('\n');
+            }
+        }
+        result.append("Fim!");
+        return result.toString();
+    }
 }
