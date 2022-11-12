@@ -2,7 +2,6 @@ package ui;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.text.Format;
 import java.util.ResourceBundle;
 
 public abstract class UserInterface {
