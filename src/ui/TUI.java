@@ -3,8 +3,10 @@ package ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ResourceBundle;
 
 public class TUI extends UserInterface{
+    private static final ResourceBundle configBundle = ResourceBundle.getBundle("ui.Menu");
 
     @Override
     public String inputLine() {
@@ -12,7 +14,7 @@ public class TUI extends UserInterface{
         try {
             return obj.readLine();
         } catch (IOException e) {
-            System.err.println(e);
+            System.err.println(configBundle.getString("IOException"));
         }
         return null;
     }
@@ -26,8 +28,8 @@ public class TUI extends UserInterface{
     public int inputInt() {
         try {
             return Integer.parseInt(inputLine());
-        } catch (Exception e) {
-            System.err.println(e);
+        } catch (NumberFormatException e) {
+            System.err.println(configBundle.getString("NumberFormatException"));
         }
         return Integer.MIN_VALUE;
     }
