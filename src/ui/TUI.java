@@ -31,7 +31,17 @@ public class TUI extends UserInterface{
         } catch (NumberFormatException e) {
             System.err.println(configBundle.getString("NumberFormatException"));
         }
-        return Integer.MIN_VALUE;
+        return 0;
+    }
+
+    @Override
+    public long inputLong() {
+        try {
+            return Long.parseLong(inputLine());
+        } catch (NumberFormatException e) {
+            System.err.println(configBundle.getString("NumberFormatException"));
+        }
+        return 0;
     }
 
     @Override

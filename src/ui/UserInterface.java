@@ -15,6 +15,9 @@ public abstract class UserInterface {
     public int inputInt(){
         return 0;
     }
+    public long inputLong(){
+        return 0;
+    }
     public void output(String text) {}
     public String question(boolean lock, String prompt, String... acceptable) {
         String answer;
@@ -30,8 +33,8 @@ public abstract class UserInterface {
         } while (lock && acceptable.length != 0);
         return answer;
     }
-    public int question(boolean lock, String prompt, int ceiling, int floor) {
-        int answer;
+    public long question(boolean lock, String prompt, long ceiling, long floor) {
+        long answer;
         do {
             output(prompt);
             answer = inputInt();
@@ -42,10 +45,16 @@ public abstract class UserInterface {
         } while (lock);
         return answer;
     }
+    public int question(boolean lock, String prompt, int ceiling, int floor) {
+        return question(lock, prompt, ceiling, floor);
+    }
     public String question(String prompt, String... acceptable) {
         return question(true, prompt, acceptable);
     }
     public int question(String prompt, int ceiling, int floor) {
+        return question(true, prompt, ceiling, floor);
+    }
+    public long     question(String prompt, long ceiling, long floor) {
         return question(true, prompt, ceiling, floor);
     }
 
