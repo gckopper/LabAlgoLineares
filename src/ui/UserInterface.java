@@ -37,7 +37,7 @@ public abstract class UserInterface {
         long answer;
         do {
             output(prompt);
-            answer = inputInt();
+            answer = inputLong();
             if (answer <= ceiling && answer >= floor) {
                 lock = false;
                 break;
@@ -46,7 +46,16 @@ public abstract class UserInterface {
         return answer;
     }
     public int question(boolean lock, String prompt, int ceiling, int floor) {
-        return question(lock, prompt, ceiling, floor);
+        int answer;
+        do {
+            output(prompt);
+            answer = inputInt();
+            if (answer <= ceiling && answer >= floor) {
+                lock = false;
+                break;
+            }
+        } while (lock);
+        return answer;
     }
     public String question(String prompt, String... acceptable) {
         return question(true, prompt, acceptable);
